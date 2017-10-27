@@ -1,0 +1,85 @@
+<template>
+  <div class="cb-item">
+    <p class="cb-item__title">
+      {{this.title}}
+    </p>
+    <p class="cb-item__text" v-html="text"></p>
+    <div class="cb-item__line">
+      <input id="pic-title" 
+        placeholder="Наша Свадьба" 
+        maxlength="22" 
+        type="text"
+        v-model="picTitle"
+        @keyup.enter="addPicTitle"
+        @blur="addPicTitle">
+      <span>Заголовок картины</span>
+    </div>
+    <div class="cb-item__line">
+      <input id="pic-name" 
+        placeholder="Анастасия и Константин" 
+        maxlength="36" 
+        type="text"
+        v-model="picName"
+        @keyup.enter="addPicName"
+        @blur="addPicName">
+      <span>Подпись</span>
+    </div>
+    <div class="cb-item__line">
+      <input id="pic-date" 
+        placeholder="29 июля 2015" 
+        maxlength="26" 
+        type="text"
+        v-model="picDate"
+        @keyup.enter="addPicDate"
+        @blur="addPicDate">
+      <span>Дата события</span>
+    </div>
+    <font-btns></font-btns>
+  </div>
+</template>
+ 
+ <script>
+  import FontBtns from './cb-title-font-btns.vue'; 
+   
+  export default {
+    name: 'CbTitle',
+    data: function () {
+      return {
+        picTitle: '',
+        picName: '',
+        picDate: '',
+        title: 'Заголовок',
+        text: `персонализируйте ваше "Дерево пожеланий"; вверху и внизу картины есть специальные поля,
+               которые можно заполнить по вашему усмотрению: вписать имена виновников торжества, или
+               особые пожелания, добавить дату, или логотип компании, если речь идет о корпоративном
+               подарке.`
+      }
+    },
+    components: {
+      'font-btns': FontBtns
+    },
+    methods: {
+      addPicTitle () {
+        let value = this.picTitle && this.picTitle.trim();
+        if (!value) {
+          return;
+        }
+        this.$emit('setcaption', this.picTitle);
+      },
+      addPicName () {
+        let value = this.picName && this.picName.trim();
+        if (!value) {
+          return;
+        }
+        this.$emit('setname', this.picName);
+      },
+      addPicDate () {
+        let value = this.picDate && this.picDate.trim();
+        if (!value) {
+          return;
+        }
+        this.$emit('setdate', this.picDate);
+      }
+    }
+  }
+</script>
