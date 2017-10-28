@@ -25,7 +25,8 @@
                     </cb-step-item>
                 </div>
                 
-                <cb-result :result-obj="resultObj">
+                <cb-result :result-obj="resultObj"
+                  @postresult="postResult">
                 </cb-result>
                 
                 <div class="cb-wrapper">
@@ -37,8 +38,7 @@
                               @setcaption="setCaption"
                               @setname="setName"
                               @setdate="setDate"
-                              @setmarks="setMarks"
-                              @postresult="postResult">
+                              @setmarks="setMarks">
                             </component>
                         </transition>
                     </div>

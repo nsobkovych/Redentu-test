@@ -54,9 +54,9 @@
           <form action="" 
              method="POST"
              name="hiddenForm"
-             @submit.prevent="onPostResult">
+             @submit.prevent="$emit('postresult');">
               <p class="cb-next"
-                @click="onPostResult">
+                @click="$emit('postresult');">
                 Далее
               </p>
 <!--              <input type="submit" value="В корзину">-->
@@ -80,12 +80,12 @@
     },
     components: {
       'result-mark': ResultMark
-    },
-    methods: {
-      onPostResult: function () {
-        console.log('Should be sent the result');
-        this.$emit('postresult');
-      }
     }
+//    methods: {
+//      onPostResult: function () {
+//        console.log('Should be sent the result');
+//        this.$emit('postresult');
+//      }
+//    }
   }
 </script>
