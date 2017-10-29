@@ -9,6 +9,7 @@
         :pic="pic"
         :key="pic.id"
         :index="index"
+        :class="{'current': currentPic === index}"
         @chosenpic="choosePic"
         ></pic-item>
     </div>
@@ -23,66 +24,17 @@
     name: 'CbPicture',
     data: function () {
       return {
-        pics: [
-          {
-            id: 1,
-            title: 'Картинка №1',
-            src: './img/pics/01.jpg'
-          },
-          {
-            id: 2,
-            title: 'Картинка №2',
-            src: './img/pics/02.jpg'
-          },
-          {
-            id: 3,
-            title: 'Картинка №3',
-            src: './img/pics/03.jpg'
-          },
-          {
-            id: 4,
-            title: 'Картинка №4',
-            src: './img/pics/04.jpg'
-          },
-          {
-            id: 5,
-            title: 'Картинка №5',
-            src: './img/pics/05.jpg'
-          },
-          {
-            id: 6,
-            title: 'Картинка №6',
-            src: './img/pics/06.jpg'
-          },
-          {
-            id: 7,
-            title: 'Картинка №7',
-            src: './img/pics/07.jpg'
-          },
-          {
-            id: 8,
-            title: 'Картинка №8',
-            src: './img/pics/08.jpg'
-          },
-          {
-            id: 9,
-            title: 'Картинка №9',
-            src: './img/pics/09.jpg'
-          },
-          {
-            id: 10,
-            title: 'Картинка №10',
-            src: './img/pics/10.jpg'
-          },
-          {
-            id: 11,
-            title: 'Картинка №11',
-            src: './img/pics/11.jpg'
-          }
-        ],
         title: 'Выберите изображение',
         text: `для начала выберите основу, саму картину, на которую вы и гости вашего 
               праздника будете наносить отпечатки пальцев с пожеланиями`
+      }
+    },
+    props: {
+      pics: {
+        required: true
+      },
+      currentPic: {
+        required: true
       }
     },
     components: {
@@ -90,8 +42,10 @@
     },
     methods: {
       choosePic (indPic) {
-        const pic = this.pics[indPic];
-        this.$emit('setpic', pic);
+        const pic = this.pics && this.pics[indPic];
+        if (pic) {
+          this.$emit('setpic', pic);
+        }
       }
     }
   }

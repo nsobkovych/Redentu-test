@@ -6,13 +6,13 @@
       <div class="cb-result__content">
           <p class="cb-result__data">
               <span>Изображение:</span>
-              <strong v-show="resultObj.picTitle">{{ resultObj.picTitle }}</strong>
-              <strong v-show="!resultObj.picTitle">Не выбрано</strong>
+              <strong v-show="resultObj.pic.title">{{ resultObj.pic.title }}</strong>
+              <strong v-show="!resultObj.pic.title">Не выбрано</strong>
           </p>
           <p class="cb-result__data">
               <span>Рама:</span>
-              <strong v-show="resultObj.borderTitle">{{ resultObj.borderTitle }}</strong>
-              <strong v-show="!resultObj.borderTitle">Не выбрано</strong>
+              <strong v-show="resultObj.border.title">{{ resultObj.border.title }}</strong>
+              <strong v-show="!resultObj.border.title">Не выбрано</strong>
           </p>
           <div class="cb-result__data">
               <span>Отпечатки:</span>
@@ -30,23 +30,23 @@
           </div>
           <div class="cb-result__object">
               <div class="cb-result__img">
-                <img :src="resultObj.pic" 
-                  :alt="resultObj.picTitle"
-                  :title="resultObj.picTitle"
+                <img :src="resultObj.pic.src" 
+                  :alt="resultObj.pic.title"
+                  :title="resultObj.pic.title"
                   width="240"
                   height="300"
-                  v-show="resultObj.pic">
+                  v-show="resultObj.pic.src">
               </div>
               <div class="cb-result__border">
-                <img :src="resultObj.border" 
-                  :alt="resultObj.borderTitle"
+                <img :src="resultObj.border.src" 
+                  :alt="resultObj.border.title"
                   width="240"
                   height="300"
-                  v-show="resultObj.border">
+                  v-show="resultObj.border.src">
               </div>
-              <p class="cb-result__text__title ariston">{{ resultObj.picCaption }}</p>
-              <p class="cb-result__text__name ariston">{{ resultObj.picName }}</p>
-              <p class="cb-result__text__date ariston">{{ resultObj.picDate }}</p>
+              <p class="cb-result__text__title ariston">{{ resultObj.caption }}</p>
+              <p class="cb-result__text__name ariston">{{ resultObj.names }}</p>
+              <p class="cb-result__text__date ariston">{{ resultObj.date }}</p>
           </div>
       </div>
       
@@ -54,12 +54,20 @@
           <form action="" 
              method="POST"
              name="hiddenForm"
-             @submit.prevent="$emit('postresult');">
-              <p class="cb-next"
-                @click="$emit('postresult');">
+             @submit.prevent="checkSubmit">
+              <button  type="button" 
+                class="cb-next"
+                :class="{ 'active': isNextAllowed }"
+                v-show="!(currentView === lastStep)"
+                @click.stop="checkView">
                 Далее
-              </p>
-<!--              <input type="submit" value="В корзину">-->
+              </button>
+              <button type="submit" 
+                class="cb-next"
+                :class="{ 'active': isSubmitAllowed }"
+                v-show="currentView === lastStep">
+                Оформить
+              </button>
               <input name="result" id="" type="text" hidden="">
           </form>
       </div>
@@ -76,16 +84,36 @@
       resultObj: {
         type: Object,
         required: true
+      },
+      currentView: {
+        type: String
+      },
+      lastStep: {
+        type: String
+      },
+      isNextAllowed: {
+        type: Boolean,
+        default: false
+      },
+      isSubmitAllowed: {
+        type: Boolean,
+        default: false
       }
     },
     components: {
       'result-mark': ResultMark
+    },
+    methods: {
+      checkView: function () {
+        if (this.isNextAllowed) {
+          this.$emit('movenext');
+        }
+      },
+      checkSubmit: function () {
+        if (this.isSubmitAllowed) {
+          this.$emit('postresult');
+        }
+      }
     }
-//    methods: {
-//      onPostResult: function () {
-//        console.log('Should be sent the result');
-//        this.$emit('postresult');
-//      }
-//    }
   }
 </script>

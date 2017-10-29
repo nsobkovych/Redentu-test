@@ -1,5 +1,5 @@
 <template>
-  <div class="cb-item">
+  <div class="cb-item" v-cloak>
     <p class="cb-item__title">
       {{this.title}}
     </p>
@@ -10,6 +10,7 @@
         maxlength="22" 
         type="text"
         v-model="picTitle"
+        :class="{ warning: isCaptionSet === false }"
         @keyup.enter="addPicTitle"
         @blur="addPicTitle">
       <span>Заголовок картины</span>
@@ -19,7 +20,8 @@
         placeholder="Анастасия и Константин" 
         maxlength="36" 
         type="text"
-        v-model="picName"
+        v-model="picNames"
+        :class="{ warning: isNamesSet === false }"
         @keyup.enter="addPicName"
         @blur="addPicName">
       <span>Подпись</span>
@@ -30,6 +32,7 @@
         maxlength="26" 
         type="text"
         v-model="picDate"
+        :class="{ warning: isDateSet === false }"
         @keyup.enter="addPicDate"
         @blur="addPicDate">
       <span>Дата события</span>
@@ -45,9 +48,9 @@
     name: 'CbTitle',
     data: function () {
       return {
-        picTitle: '',
-        picName: '',
-        picDate: '',
+        picTitle: this.caption || '',
+        picNames: this.names || '',
+        picDate: this.date || '',
         title: 'Заголовок',
         text: `персонализируйте ваше "Дерево пожеланий"; вверху и внизу картины есть специальные поля,
                которые можно заполнить по вашему усмотрению: вписать имена виновников торжества, или
@@ -55,29 +58,40 @@
                подарке.`
       }
     },
+    props: {
+      caption: {
+        type: String,
+        default: ''
+      },
+      names: {
+        type: String,
+        default: ''
+      },
+      date: {
+        type: String,
+        default: ''
+      },
+      isCaptionSet: {
+        default: null
+      },
+      isNamesSet: {
+        default: null
+      },
+      isDateSet: {
+        default: null
+      }
+    },
     components: {
       'font-btns': FontBtns
     },
     methods: {
       addPicTitle () {
-        let value = this.picTitle && this.picTitle.trim();
-        if (!value) {
-          return;
-        }
         this.$emit('setcaption', this.picTitle);
       },
       addPicName () {
-        let value = this.picName && this.picName.trim();
-        if (!value) {
-          return;
-        }
-        this.$emit('setname', this.picName);
+        this.$emit('setnames', this.picNames);
       },
       addPicDate () {
-        let value = this.picDate && this.picDate.trim();
-        if (!value) {
-          return;
-        }
         this.$emit('setdate', this.picDate);
       }
     }

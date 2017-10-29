@@ -2,7 +2,8 @@
   <div class="cb-step" 
      :data-step="step.dataStep" 
      :id="step.id"
-     @click.stop="onSwitchView">
+     @click.stop="onSwitchView"
+     v-cloak>
     <p>
       <span>{{index + 1}}</span>
       {{step.title}}

@@ -5,7 +5,9 @@
       :value="mark.clr"
       v-model="mark.checked"
       @change="$emit('addmark')">
-    <label :for="mark.id" :title="mark.title"></label>
+    <label :for="mark.id" 
+      :title="mark.title"
+      ></label>
     <img :src="mark.src" 
          :alt="mark.title" 
          width="136"
@@ -20,11 +22,6 @@
       mark: {
         type: Object,
         required: true
-      }
-    },
-    data: function () {
-      return {
-        checkedMarks: []
       }
     }
   }

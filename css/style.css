@@ -1267,11 +1267,18 @@ nav {
   background-color: #8dbc55;
   color: #fff;
   font-size: 18px;
-  line-height: 55px;
+  line-height: 52px;
   font-family: FS-medium;
   text-align: center;
   text-transform: uppercase;
   opacity: 0.7;
+  outline: none;
+  border-style: none;
+  cursor: auto;
+}
+.cb-result__bottom .cb-next:active,
+.cb-result__bottom .cb-next:focus {
+  border-style: none;
 }
 .cb-result__bottom .cb-next.active {
   cursor: pointer;
@@ -3088,7 +3095,9 @@ footer {
   width: 20px;
   height: 20px;
   border-radius: 5px;
-  background-color: aqua;
   margin: 0 8px 8px 0;
   flex: 0 0 auto;
+}
+.warning {
+  background-color: #ffeaea;
 }
