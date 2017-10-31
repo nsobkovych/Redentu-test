@@ -37,7 +37,9 @@
         @blur="addPicDate">
       <span>Дата события</span>
     </div>
-    <font-btns></font-btns>
+    <font-btns :current-font="currentFont"
+      @onsetfont="onSetFont"
+    ></font-btns>
   </div>
 </template>
  
@@ -71,6 +73,9 @@
         type: String,
         default: ''
       },
+      currentFont: {
+        type: String
+      },
       isCaptionSet: {
         default: null
       },
@@ -93,6 +98,9 @@
       },
       addPicDate () {
         this.$emit('setdate', this.picDate);
+      },
+      onSetFont (font) {
+        this.$emit('setfont', font);
       }
     }
   }

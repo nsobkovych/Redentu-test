@@ -22,17 +22,10 @@
         let marksPrice = 0;
         let len = this.resultObj.marks.length;
         
-        if (len) {
-//          for (let i = 0; i < len; i++) {
-//            console.log(this.resultObj.marks[i]);
-//            marksPrice += this.resultObj.marks[i].price;
-//          }
-          
-          marksPrice = len * 10;
+        for (let i = 0; i < len; i++) {
+          marksPrice += this.resultObj.marks[i].price;
         }
 
-//        console.log(marksPrice);
-        
         return this.resultObj.pic.price 
              + this.resultObj.border.price 
              + textPrice 

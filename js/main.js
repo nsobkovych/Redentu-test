@@ -286,7 +286,8 @@ new Vue({
         title: 'CottageIvy',
         src: './img/marks/CottageIvy.jpg',
         clr: '#0d5f29',
-        checked: false
+        checked: false,
+        price: 10
       },
       {
         id: 'mark7',
@@ -399,6 +400,7 @@ new Vue({
       caption: '',
       names: '',
       date: '',
+      font: 'ariston',
       textPrice: {
         captionPrice: 0,
         namesPrice: 0,
@@ -459,6 +461,9 @@ new Vue({
       this.isDateSet = date !== '';
       this.isNextAllowed = this.$_checkDataForStep(this.currentView);
     },
+    setFont: function(font) {
+      this.resultObj.font = font;
+    },
     setMarks: function(marks) {
       this.resultObj.marks = [].concat(marks);
       this.isSubmitAllowed = this.isNextAllowed = this.$_checkDataForStep(this.currentView);
@@ -515,11 +520,13 @@ new Vue({
         this.resultObj.border.id = res.body.border.id;
         this.resultObj.border.title = res.body.border.title;
         this.resultObj.border.src= res.body.border.src;
+        this.resultObj.border.price= res.body.border.price;
         this.resultObj.marks = res.body.marks;
         this.resultObj.caption = res.body.caption;
         this.resultObj.names = res.body.names;
         this.resultObj.date = res.body.date;
         this.resultObj.textPrice = res.body.textPrice;
+        this.resultObj.font = res.body.font;
       })
       .catch(err => {
         console.log(err);

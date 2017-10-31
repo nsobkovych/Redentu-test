@@ -46,6 +46,7 @@
                               :caption="resultObj.caption"
                               :names="resultObj.names"
                               :date="resultObj.date"
+                              :current-font="resultObj.font"
                               :is-caption-set="isCaptionSet"
                               :is-names-set="isNamesSet"
                               :is-date-set="isDateSet"
@@ -54,6 +55,7 @@
                               @setcaption="setCaption"
                               @setnames="setNames"
                               @setdate="setDate"
+                              @setfont="setFont"
                               @setmarks="setMarks">
                             </component>
                         </transition>

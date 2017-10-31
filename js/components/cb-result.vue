@@ -44,9 +44,9 @@
                   height="300"
                   v-show="resultObj.border.src">
               </div>
-              <p class="cb-result__text__title ariston">{{ resultObj.caption }}</p>
-              <p class="cb-result__text__name ariston">{{ resultObj.names }}</p>
-              <p class="cb-result__text__date ariston">{{ resultObj.date }}</p>
+              <p class="cb-result__text__title" :class="resultObj.font">{{ resultObj.caption }}</p>
+              <p class="cb-result__text__name" :class="resultObj.font">{{ resultObj.names }}</p>
+              <p class="cb-result__text__date" :class="resultObj.font">{{ resultObj.date }}</p>
           </div>
       </div>
       

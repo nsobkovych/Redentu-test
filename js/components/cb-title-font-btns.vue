@@ -1,25 +1,53 @@
 <template>
   <div class="cb-item__line--btns">
-    <span id="ariston" class="btn-font btn-font--active">
-      Ariston
-    </span>
-    <span id="davinci" class="btn-font">
-      DaVinci
-    </span>
-    <span id="brody" class="btn-font">
-      Brody
-    </span>
+    <font-btns-item v-for="(font, index) of fonts"
+      :font="font"
+      :key="font.id"
+      :index="index"
+      :class="{ 'btn-font--active': currentFont === font.id }"
+      @chosenfont="chooseFont"
+      ></font-btns-item>
   </div>
 </template>
  
 <script>
+  import FontBtnsItem from './cb-title-font-btns-item.vue'; 
+  
   export default {
     name: 'FontBtns',
     data: function () {
       return {
-        fonts: ['Ariston', 'DaVinci', 'Brody']
+        fonts: [ 
+          {
+            id: 'ariston',
+            name: 'Ariston'
+          },
+          {
+            id: 'davinci',
+            name: 'DaVinci'
+          },
+          {
+            id: 'brody',
+            name: 'Brody'
+          }
+        ]
       }
     },
-    props: ['font']
+    props: {
+      currentFont: {
+        required: true
+      }
+    },
+    components: {
+      'font-btns-item': FontBtnsItem
+    },
+    methods: {
+      chooseFont (fontInd) {
+        const font = this.fonts && this.fonts[fontInd].id;
+        if (font) {
+          this.$emit('onsetfont', font);
+        }
+      }
+    }
   }
 </script>
